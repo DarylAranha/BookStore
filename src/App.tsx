@@ -38,31 +38,39 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="App">
-        <Navbar bg="dark" variant="dark">
+        <Navbar
+          bg="dark"
+          variant="dark"
+          expand="lg"
+          className="justify-content-between"
+        >
           <Navbar.Brand as={Link} to="/">
             Bookstore
           </Navbar.Brand>
-          <Nav className="ml-auto">
-            {!isLoggedIn ? (
-              <>
-                <Nav.Link as={Link} to="/signup">
-                  Sign Up
-                </Nav.Link>
-                <Nav.Link as={Link} to="/signin">
-                  Sign In
-                </Nav.Link>
-              </>
-            ) : (
-              <>
-                <Nav.Link as={Link} to="/cart">
-                  Cart ({cartItems.length})
-                </Nav.Link>
-                <Nav.Link as={Link} to="/signout" onClick={handleLogout}>
-                  Sign Out
-                </Nav.Link>
-              </>
-            )}
-          </Nav>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              {!isLoggedIn ? (
+                <>
+                  <Nav.Link as={Link} to="/signup">
+                    Sign Up
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/signin">
+                    Sign In
+                  </Nav.Link>
+                </>
+              ) : (
+                <>
+                  <Nav.Link as={Link} to="/cart">
+                    Cart ({cartItems.length})
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/signout" onClick={handleLogout}>
+                    Sign Out
+                  </Nav.Link>
+                </>
+              )}
+            </Nav>
+          </Navbar.Collapse>
         </Navbar>
         <Switch>
           <Route path="/signup">
