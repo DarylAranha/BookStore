@@ -12,7 +12,8 @@ export class BookController {
 
   async fetchBooks(): Promise<void> {
     try {
-      this.books = await getBooks(); // Implement a service function to fetch books from an API or mock data.
+      this.books = await getBooks();
+      console.log(this.books);
     } catch (error) {
       console.error("Failed to fetch books:", error);
     }

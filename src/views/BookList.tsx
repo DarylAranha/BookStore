@@ -1,13 +1,16 @@
-// src/views/BookList.tsx
-
 import React from "react";
 import { Book } from "../models/Book";
 
 interface BookListProps {
   books: Book[];
+  onAddToCart: (book: Book) => void;
 }
 
-const BookList: React.FC<BookListProps> = ({ books }) => {
+const BookList: React.FC<BookListProps> = ({ books, onAddToCart }) => {
+  const handleAddToCart = (book: Book) => {
+    onAddToCart(book);
+  };
+
   return (
     <div>
       <h2>Book List</h2>
@@ -17,6 +20,7 @@ const BookList: React.FC<BookListProps> = ({ books }) => {
             <h3>{book.title}</h3>
             <p>Author: {book.author}</p>
             <p>Description: {book.description}</p>
+            <button onClick={() => handleAddToCart(book)}>Add to Cart</button>
           </li>
         ))}
       </ul>
