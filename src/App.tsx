@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Navbar, Nav } from "react-bootstrap";
 import SignUp from "./views/SignUp";
 import SignIn from "./views/SignIn";
 import SignOut from "./views/SignOut";
@@ -12,6 +13,7 @@ import { BookController } from "./controllers/BookController";
 const App: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [cartItems, setCartItems] = useState<Book[]>([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleAddToCart = (book: Book) => {
     setCartItems([...cartItems, book]);
@@ -24,31 +26,50 @@ const App: React.FC = () => {
     });
   }, []);
 
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setCartItems([]);
+  };
+
   return (
     <Router>
       <div className="App">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/signup">Sign Up</Link>
-            </li>
-            <li>
-              <Link to="/signin">Sign In</Link>
-            </li>
-            <li>
-              <Link to="/cart">Cart ({cartItems.length})</Link>
-            </li>
-            <li>
-              <Link to="/signout">Sign Out</Link>
-            </li>
-          </ul>
-        </nav>
+        <Navbar bg="dark" variant="dark">
+          <Navbar.Brand as={Link} to="/">
+            Bookstore
+          </Navbar.Brand>
+          <Nav className="ml-auto">
+            {!isLoggedIn ? (
+              <>
+                <Nav.Link as={Link} to="/signup">
+                  Sign Up
+                </Nav.Link>
+                <Nav.Link as={Link} to="/signin">
+                  Sign In
+                </Nav.Link>
+              </>
+            ) : (
+              <>
+                <Nav.Link as={Link} to="/cart">
+                  Cart ({cartItems.length})
+                </Nav.Link>
+                <Nav.Link as={Link} to="/signout" onClick={handleLogout}>
+                  Sign Out
+                </Nav.Link>
+              </>
+            )}
+          </Nav>
+        </Navbar>
         <Switch>
           <Route path="/signup">
-            <SignUp />
+            <SignUp onLogin={handleLogin} />
           </Route>
           <Route path="/signin">
-            <SignIn />
+            <SignIn onLogin={handleLogin} />
           </Route>
           <Route path="/cart">
             <Cart cartItems={cartItems} />

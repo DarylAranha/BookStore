@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyANJWHvbqy_kqGKWYXwy2mmmmxrMzN6VPc",
   authDomain: "bookstore-3b84f.firebaseapp.com",
   projectId: "bookstore-3b84f",
@@ -13,5 +13,5 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+export const app = initializeApp(firebaseConfig);
+// export const auth = getAuth(app);

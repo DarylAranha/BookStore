@@ -1,4 +1,5 @@
 import React from "react";
+import { Button, Card } from "react-bootstrap";
 import { Book } from "../models/Book";
 
 interface BookListProps {
@@ -14,16 +15,20 @@ const BookList: React.FC<BookListProps> = ({ books, onAddToCart }) => {
   return (
     <div>
       <h2>Book List</h2>
-      <ul>
-        {books.map((book) => (
-          <li key={book.id}>
-            <h3>{book.title}</h3>
-            <p>Author: {book.author}</p>
-            <p>Description: {book.description}</p>
-            <button onClick={() => handleAddToCart(book)}>Add to Cart</button>
-          </li>
-        ))}
-      </ul>
+      {books.map((book) => (
+        <Card key={book.id} className="mb-3">
+          <Card.Body>
+            <Card.Title>{book.title}</Card.Title>
+            <Card.Subtitle className="mb-2 text-muted">
+              {book.author}
+            </Card.Subtitle>
+            <Card.Text>{book.description}</Card.Text>
+            <Button variant="primary" onClick={() => handleAddToCart(book)}>
+              Add to Cart
+            </Button>
+          </Card.Body>
+        </Card>
+      ))}
     </div>
   );
 };

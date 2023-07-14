@@ -1,6 +1,5 @@
-// src/views/Cart.tsx
-
 import React from "react";
+import { Button } from "react-bootstrap";
 import { Book } from "../models/Book";
 
 interface CartProps {
@@ -31,7 +30,9 @@ const Cart: React.FC<CartProps> = ({ cartItems }) => {
         <div>
           {renderCartItems()}
           <h3>Total Price: {calculateTotalPrice()}</h3>
-          <button type="button">Checkout</button>
+          <Button variant="primary" type="button">
+            Checkout
+          </Button>
         </div>
       ) : (
         <p>Your cart is empty.</p>
